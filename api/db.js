@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
-// Use Heroku environment variable or fallback local URI
-const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/myLocalDB';
+const MONGO_URI = process.env.MONGODB_URI;
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    if (!MONGO_URI) {
+      throw new Error("❌ MONGODB_URI is missing. Add it in Heroku → Settings → Config Vars");
+    }
 
-    console.log('✅ MongoDB Connected');
+    await mongoose.connect(MONGO_URI);
+
+    console.log('✅ MongoDB Connected Successfully');
   } catch (err) {
-    console.error('❌ MongoDB Error:', err.message);
+    console.error('❌ MongoDB Connection Error:', err.message);
     process.exit(1);
   }
 };
