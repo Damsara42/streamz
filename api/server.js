@@ -1,14 +1,7 @@
-const mongoose = require("mongoose");
-
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.error("MongoDB error:", err));
-
-
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const connectDB = require('./db'); // Import MongoDB connection
+const connectDB = require('./db'); // MongoDB connection file
 
 // Import routes
 const mainRoutes = require('./routes/main');
@@ -36,7 +29,7 @@ app.use('/api', mainRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 
-// --- Frontend Route Handling ---
+// --- Frontend Routes ---
 app.get(['/show.html', '/watch.html', '/login.html'], (req, res) => {
   res.sendFile(path.join(__dirname, '../public', req.path));
 });
@@ -49,6 +42,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+// --- Start server ---
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
