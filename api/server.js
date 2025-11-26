@@ -1,3 +1,10 @@
+const mongoose = require("mongoose");
+
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch(err => console.error("MongoDB error:", err));
+
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
