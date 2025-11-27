@@ -1,6 +1,9 @@
 {
   "name": "streaming-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "20.x"
+  },
   "description": "A K-Drama and Anime streaming website with a full admin CMS.",
   "main": "api/server.js",
   "scripts": {
