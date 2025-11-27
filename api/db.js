@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Use local MongoDB or your Cloud URL
+// It MUST look for process.env.MONGO_URI first
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/streamhub';
 
 const connectDB = async () => {
@@ -9,7 +9,7 @@ const connectDB = async () => {
     console.log('✅ MongoDB Connected successfully.');
   } catch (err) {
     console.error('❌ MongoDB Connection Error:', err.message);
-    process.exit(1); // Exit process with failure
+    process.exit(1);
   }
 };
 
