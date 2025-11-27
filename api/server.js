@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const connectDB = require('./db'); // MongoDB connection file
+const connectDB = require('./db'); // Import MongoDB connection
 
 // Import routes
 const mainRoutes = require('./routes/main');
@@ -29,7 +29,7 @@ app.use('/api', mainRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 
-// --- Frontend Routes ---
+// --- Frontend Route Handling ---
 app.get(['/show.html', '/watch.html', '/login.html'], (req, res) => {
   res.sendFile(path.join(__dirname, '../public', req.path));
 });
@@ -42,7 +42,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// --- Start server ---
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

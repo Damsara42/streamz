@@ -1,19 +1,15 @@
 const mongoose = require('mongoose');
 
-const MONGO_URI = process.env.MONGODB_URI;
+// Use local MongoDB or your Cloud URL
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/streamhub';
 
 const connectDB = async () => {
   try {
-    if (!MONGO_URI) {
-      throw new Error("❌ MONGODB_URI is missing. Add it in Heroku → Settings → Config Vars");
-    }
-
     await mongoose.connect(MONGO_URI);
-
-    console.log('✅ MongoDB Connected Successfully');
+    console.log('✅ MongoDB Connected successfully.');
   } catch (err) {
     console.error('❌ MongoDB Connection Error:', err.message);
-    process.exit(1);
+    process.exit(1); // Exit process with failure
   }
 };
 
